@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class MonthlyReport {
     public HashMap<Integer,String> manager = new HashMap<>();
@@ -31,12 +31,12 @@ public class MonthlyReport {
 
     public void toItem(){
         String[] lineContents01 = manager.get(1).split("\r?\n");
-            for (int i = 1; i < lineContents01.length; i++){
-                String line = lineContents01[i];
-                String[] parts = line.split(",");
-                Items item = new Items(parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
-                items01.add(item);
-            }
+        for (int i = 1; i < lineContents01.length; i++){
+            String line = lineContents01[i];
+            String[] parts = line.split(",");
+            Items item = new Items(parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+            items01.add(item);
+        }
         String[] lineContents02 = manager.get(2).split("\r?\n");
         for (int i = 1; i < lineContents02.length; i++){
             String line = lineContents02[i];
@@ -53,6 +53,10 @@ public class MonthlyReport {
         }
     }
     public void getInfoOfItemInJanuary(){
+        if (items01.size() == 0){
+            System.out.println("Отчёты не были считаны");
+            System.exit(0);
+        }
         Items max = null;
         Items min = null;
         int totalOfMax = 0;
@@ -77,6 +81,10 @@ public class MonthlyReport {
         System.out.println("Январь: \nСамый прибыльный товар: " + max.name + " " + max.getFinalSum() + "\nСамая большая трата: " + min.name + " " + min.getFinalSum());
     }
     public void getInfoOfItemInFebruary(){
+        if (items02.size() == 0){
+            System.out.println("Отчёты не были считаны");
+            System.exit(0);
+        }
         Items max = null;
         Items min = null;
         int totalOfMax = 0;
@@ -102,6 +110,10 @@ public class MonthlyReport {
     }
 
     public void getInfoOfItemInMarch(){
+        if (items03.size() == 0){
+            System.out.println("Отчёты не были считаны");
+            System.exit(0);
+        }
         Items max = null;
         Items min = null;
         int totalOfMax = 0;
@@ -126,4 +138,3 @@ public class MonthlyReport {
         System.out.println("Март: \nСамый прибыльный товар: " + max.name + " " + max.getFinalSum() + "\nСамая большая трата: " + min.name + " " + min.getFinalSum());
     }
 }
-

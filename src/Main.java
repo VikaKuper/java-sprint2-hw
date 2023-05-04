@@ -14,7 +14,7 @@ public class Main {
         while (true){
             printMenu();
             int command = scanner.nextInt();
-            
+
             if (command == 1){
                 monthlyReport.MonthlyReport();
                 monthlyReport.toItem();
@@ -26,12 +26,12 @@ public class Main {
             }else if (command == 3){
                 boolean answer = calculator.check();
                 System.out.println("Результат проверки: " + answer);
-                
+
             }else if (command == 4){
                 monthlyReport.getInfoOfItemInJanuary();
                 monthlyReport.getInfoOfItemInFebruary();
                 monthlyReport.getInfoOfItemInMarch();
-                
+
             }else if (command == 5){
                 yearlyReport.printInfo();
             }else if (command == 0){

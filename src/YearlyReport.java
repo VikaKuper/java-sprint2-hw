@@ -3,12 +3,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+
 
 public class YearlyReport {
     public String contentOfYear;
     public ArrayList<Items> items = new ArrayList<>();
     public Calculator calculator = new Calculator();
+    public int profit01 = 0;
+    public int profit02 = 0;
+    public int profit03 = 0;
+    public int expenses01 = 0;
+    public int expenses02 = 0;
+    public int expenses03 = 0;
 
 
 
@@ -36,13 +42,12 @@ public class YearlyReport {
             items.add(item);
         }
     }
+
     public void printInfo(){
-        int profit01 = 0;
-        int profit02 = 0;
-        int profit03 = 0;
-        int expenses01 = 0;
-        int expenses02 = 0;
-        int expenses03 = 0;
+        if (items.size() == 0){
+            System.out.println("Отчёт не был считан");
+            System.exit(0);
+        }
         int year = 2021;
         String month01 = null;
         String month02 = null;

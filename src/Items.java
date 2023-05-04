@@ -12,16 +12,15 @@ public class Items {
         this.quantity = quantity;
         this.price = price;
     }
-    public Items(int month, int sum, boolean isExpense){
+
+    public Items(int month, int sum, boolean isExpense) {
         this.month = month;
         this.sum = sum;
         this.isExpense = isExpense;
     }
 
-    public int getFinalSum(){
+    public int getFinalSum() {
         int sum = quantity * price;
         return sum;
     }
-
-
 }
