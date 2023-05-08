@@ -11,39 +11,41 @@ public class Main {
         Calculator calculator = new Calculator(monthlyReport, yearlyReport);
 
 
-        while (true){
+        while (true) {
             printMenu();
             int command = scanner.nextInt();
 
-            if (command == 1){
-                monthlyReport.MonthlyReport();
-                monthlyReport.toItem();
+            if (command == 1) {
+                monthlyReport.toItem("january","resources/m.202101.csv");
+                monthlyReport.toItem("february","resources/m.202102.csv");
+                monthlyReport.toItem("march","resources/m.202103.csv");
 
-            }else if (command == 2){
+            } else if (command == 2) {
                 yearlyReport.YearlyReport();
                 yearlyReport.toItem();
 
-            }else if (command == 3){
+            } else if (command == 3) {
                 boolean answer = calculator.check();
                 System.out.println("Результат проверки: " + answer);
 
-            }else if (command == 4){
+            } else if (command == 4) {
                 monthlyReport.getInfoOfItemInJanuary();
                 monthlyReport.getInfoOfItemInFebruary();
                 monthlyReport.getInfoOfItemInMarch();
 
-            }else if (command == 5){
+            } else if (command == 5) {
                 yearlyReport.printInfo();
-            }else if (command == 0){
+            } else if (command == 0) {
                 System.out.println("Выход");
                 break;
-            }else {
+            } else {
                 System.out.println("Извините, такой команды пока нет.");
             }
 
         }
     }
-    public static void printMenu(){
+
+    public static void printMenu() {
         System.out.println("Введите комманду:");
         System.out.println("1 - Считать все месячные отчёты");
         System.out.println("2 - Считать годовой отчёт");

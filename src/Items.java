@@ -1,12 +1,14 @@
 public class Items {
     public String name;
+    public String months;
     public boolean isExpense;
     public int quantity;
     public int price;
     public int month;
     public int sum;
 
-    public Items(String name, boolean expense, int quantity, int price) {
+    public Items(String months, String name, boolean expense, int quantity, int price) {
+        this.months = months;
         this.name = name;
         this.isExpense = expense;
         this.quantity = quantity;

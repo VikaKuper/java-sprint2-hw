@@ -17,13 +17,13 @@ public class YearlyReport {
     public int expenses03 = 0;
 
 
-
     public void YearlyReport() throws IOException {
         String file = "resources/y.2021.csv";
         contentOfYear = readFileContents(file);
 
 
     }
+
     String readFileContents(String path) {
         try {
             return Files.readString(Path.of(path));
@@ -38,13 +38,13 @@ public class YearlyReport {
         for (int i = 1; i < lineContents01.length; i++) {
             String line = lineContents01[i];
             String[] parts = line.split(",");
-            Items item = new Items(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]),Boolean.parseBoolean(parts[2]));
+            Items item = new Items(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Boolean.parseBoolean(parts[2]));
             items.add(item);
         }
     }
 
-    public void printInfo(){
-        if (items.size() == 0){
+    public void printInfo() {
+        if (items.size() == 0) {
             System.out.println("Отчёт не был считан");
             System.exit(0);
         }
@@ -55,34 +55,34 @@ public class YearlyReport {
         int sumOfExpenses = 0;
         int sumOfProfit = 0;
 
-        for (Items item : items){
-            if (item.month == 01){
+        for (Items item : items) {
+            if (item.month == 01) {
                 month01 = "Январь";
-                if (item.isExpense){
+                if (item.isExpense) {
                     expenses01 = item.sum;
                     sumOfExpenses = expenses01;
                     continue;
-                }else{
+                } else {
                     profit01 = item.sum;
                     sumOfProfit = profit01;
                 }
             }
-            if (item.month == 02){
+            if (item.month == 02) {
                 month02 = "Февраль";
-                if (item.isExpense){
+                if (item.isExpense) {
                     expenses02 = item.sum;
                     sumOfExpenses = sumOfExpenses + expenses02;
-                }else{
+                } else {
                     profit02 = item.sum;
                     sumOfProfit = sumOfProfit + profit02;
                 }
             }
-            if (item.month == 03){
+            if (item.month == 03) {
                 month03 = "Март";
-                if (item.isExpense){
+                if (item.isExpense) {
                     expenses03 = item.sum;
                     sumOfExpenses = sumOfExpenses + expenses03;
-                }else{
+                } else {
                     profit03 = item.sum;
                     sumOfProfit = sumOfProfit + profit03;
                 }

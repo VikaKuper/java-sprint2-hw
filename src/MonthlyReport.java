@@ -7,134 +7,227 @@ import java.util.HashMap;
 
 
 public class MonthlyReport {
-    public HashMap<Integer,String> manager = new HashMap<>();
-    public ArrayList<Items> items01 = new ArrayList<>();
-    public ArrayList<Items> items02 = new ArrayList<>();
-    public ArrayList<Items> items03 = new ArrayList<>();
-    public void MonthlyReport() throws IOException {
-
-        for (int i = 1; i <= 3; i++){
-            String file = "resources/m.20210" + i +".csv";
-            String contentOfMonth = readFileContents(file);
-            manager.put(i,contentOfMonth);
-        }
-    }
+    public ArrayList<Items> items = new ArrayList<>();
 
     String readFileContents(String path) {
+
         try {
+
             return Files.readString(Path.of(path));
+
         } catch (IOException e) {
+
             System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
+
             return Collections.emptyList().toString();
+
         }
+
     }
 
-    public void toItem(){
-        String[] lineContents01 = manager.get(1).split("\r?\n");
-        for (int i = 1; i < lineContents01.length; i++){
-            String line = lineContents01[i];
+
+
+    public void toItem(String month, String path){
+        String content = readFileContents(path);
+
+        String[] lines = content.split("\r?\n");
+
+        for (int i = 1; i < lines.length; i++){
+
+            String line = lines[i];
+
             String[] parts = line.split(",");
-            Items item = new Items(parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
-            items01.add(item);
+
+            Items item = new Items(month, parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+
+            items.add(item);
+
         }
-        String[] lineContents02 = manager.get(2).split("\r?\n");
-        for (int i = 1; i < lineContents02.length; i++){
-            String line = lineContents02[i];
-            String[] parts = line.split(",");
-            Items item = new Items(parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
-            items02.add(item);
-        }
-        String[] lineContents03 = manager.get(3).split("\r?\n");
-        for (int i = 1; i < lineContents03.length; i++){
-            String line = lineContents03[i];
-            String[] parts = line.split(",");
-            Items item = new Items(parts[0], Boolean.parseBoolean(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
-            items03.add(item);
-        }
+
+
     }
+
     public void getInfoOfItemInJanuary(){
-        if (items01.size() == 0){
+
+        if (items.size() == 0){
+
             System.out.println("Отчёты не были считаны");
+
             System.exit(0);
+
         }
+
         Items max = null;
+
         Items min = null;
+
         int totalOfMax = 0;
+
         int totalOfMin = 0;
-        for (Items item : items01) {
-            if (item.isExpense) {
-                continue;
-            }
-            if (item.getFinalSum() > totalOfMax) {
-                totalOfMax = item.getFinalSum();
-                max = item;
-            }
-        }
-        for (Items item : items01){
-            if(item.isExpense){
-                if (item.getFinalSum() > totalOfMin){
-                    totalOfMin = item.getFinalSum();
-                    min = item;
+
+        for (Items item : items) {
+            if (item.months == "january") {
+
+                if (item.isExpense) {
+
+                    continue;
+
                 }
+
+                if (item.getFinalSum() > totalOfMax) {
+
+                    totalOfMax = item.getFinalSum();
+
+                    max = item;
+
+                }
+
             }
         }
+
+        for (Items item : items) {
+            if (item.months == "january") {
+
+                if (item.isExpense) {
+
+                    if (item.getFinalSum() > totalOfMin) {
+
+                        totalOfMin = item.getFinalSum();
+
+                        min = item;
+
+                    }
+
+                }
+
+            }
+        }
+
         System.out.println("Январь: \nСамый прибыльный товар: " + max.name + " " + max.getFinalSum() + "\nСамая большая трата: " + min.name + " " + min.getFinalSum());
+
     }
+
     public void getInfoOfItemInFebruary(){
-        if (items02.size() == 0){
+
+        if (items.size() == 0){
+
             System.out.println("Отчёты не были считаны");
+
             System.exit(0);
+
         }
+
         Items max = null;
+
         Items min = null;
+
         int totalOfMax = 0;
+
         int totalOfMin = 0;
-        for (Items item : items02) {
-            if (item.isExpense) {
-                continue;
-            }
-            if (item.getFinalSum() > totalOfMax) {
-                totalOfMax = item.getFinalSum();
-                max = item;
-            }
-        }
-        for (Items item : items02){
-            if(item.isExpense){
-                if (item.getFinalSum() > totalOfMin){
-                    totalOfMin = item.getFinalSum();
-                    min = item;
+
+        for (Items item : items) {
+            if (item.months == "february") {
+
+                if (item.isExpense) {
+
+                    continue;
+
                 }
+
+                if (item.getFinalSum() > totalOfMax) {
+
+                    totalOfMax = item.getFinalSum();
+
+                    max = item;
+
+                }
+
             }
         }
+
+        for (Items item : items) {
+            if (item.months == "february") {
+
+                if (item.isExpense) {
+
+                    if (item.getFinalSum() > totalOfMin) {
+
+                        totalOfMin = item.getFinalSum();
+
+                        min = item;
+
+                    }
+
+                }
+
+            }
+        }
+
         System.out.println("Февраль: \nСамый прибыльный товар: " + max.name + " " + max.getFinalSum() + "\nСамая большая трата: " + min.name + " " + min.getFinalSum());
+
     }
+
+
 
     public void getInfoOfItemInMarch(){
-        if (items03.size() == 0){
+
+        if (items.size() == 0){
+
             System.out.println("Отчёты не были считаны");
+
             System.exit(0);
+
         }
+
         Items max = null;
+
         Items min = null;
+
         int totalOfMax = 0;
+
         int totalOfMin = 0;
-        for (Items item : items03) {
-            if (item.isExpense) {
-                continue;
-            }
-            if (item.getFinalSum() > totalOfMax) {
-                totalOfMax = item.getFinalSum();
-                max = item;
-            }
-        }
-        for (Items item : items03){
-            if(item.isExpense){
-                if (item.getFinalSum() > totalOfMin){
-                    totalOfMin = item.getFinalSum();
-                    min = item;
+
+        for (Items item : items) {
+            if (item.months == "march") {
+
+                if (item.isExpense) {
+
+                    continue;
+
                 }
+
+                if (item.getFinalSum() > totalOfMax) {
+
+                    totalOfMax = item.getFinalSum();
+
+                    max = item;
+
+                }
+
             }
         }
+
+        for (Items item : items) {
+            if (item.months == "march") {
+
+                if (item.isExpense) {
+
+
+                    if (item.getFinalSum() > totalOfMin) {
+
+                        totalOfMin = item.getFinalSum();
+
+                        min = item;
+
+                    }
+
+                }
+
+            }
+        }
+
         System.out.println("Март: \nСамый прибыльный товар: " + max.name + " " + max.getFinalSum() + "\nСамая большая трата: " + min.name + " " + min.getFinalSum());
+
     }
+
 }

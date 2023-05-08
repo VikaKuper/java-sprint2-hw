@@ -10,24 +10,24 @@ public class Calculator {
         this.monthlyReport = monthlyReport;
         this.yearlyReport = yearlyReport;
     }
-    public Calculator(){
+
+    public Calculator() {
 
     }
 
     public boolean check() {
-        if (yearlyReport.items.size() == 0 || monthlyReport.items01.size() == 0 || monthlyReport.items02.size() == 0 || monthlyReport.items03.size() == 0){
+        if (yearlyReport.items.size() == 0 || monthlyReport.items.size() == 0) {
             System.out.println("Отчёты не были считаны");
             System.exit(0);
         }
         if (yearlyReport.profit01 == 0 || yearlyReport.expenses01 == 0 || yearlyReport.profit02 == 0 ||
-                yearlyReport.expenses02 == 0 || yearlyReport.profit03 == 0 || yearlyReport.expenses03 == 0){
+                yearlyReport.expenses02 == 0 || yearlyReport.profit03 == 0 || yearlyReport.expenses03 == 0) {
             System.out.println("Информация об отчетах не была выведена.");
             System.exit(0);
         }
 
-        ArrayList<Items> january = new ArrayList<>(monthlyReport.items01);
-        ArrayList<Items> february = new ArrayList<>(monthlyReport.items02);
-        ArrayList<Items> march = new ArrayList<>(monthlyReport.items03);
+        ArrayList<Items> months = new ArrayList<>(monthlyReport.items);
+
 
         int sumOfProfitOfJanuary = 0;
         int sumOfProfitOfFebruary = 0;
@@ -37,20 +37,26 @@ public class Calculator {
         int sumOfExpensesOfMarch = 0;
         boolean answer = false;
 
-        for (Items item : january) {
-            if (item.isExpense) {
-                sumOfExpensesOfJanuary = sumOfExpensesOfJanuary + item.quantity * item.price;
-            } else sumOfProfitOfJanuary = sumOfProfitOfJanuary + item.quantity * item.price;
+        for (Items item : months) {
+            if (item.months == "january") {
+                if (item.isExpense) {
+                    sumOfExpensesOfJanuary = sumOfExpensesOfJanuary + item.quantity * item.price;
+                } else sumOfProfitOfJanuary = sumOfProfitOfJanuary + item.quantity * item.price;
+            }
         }
-        for (Items item : february) {
-            if (item.isExpense) {
-                sumOfExpensesOfFebruary = sumOfExpensesOfFebruary + item.quantity * item.price;
-            } else sumOfProfitOfFebruary = sumOfProfitOfFebruary + item.quantity * item.price;
+        for (Items item : months) {
+            if (item.months == "february") {
+                if (item.isExpense) {
+                    sumOfExpensesOfFebruary = sumOfExpensesOfFebruary + item.quantity * item.price;
+                } else sumOfProfitOfFebruary = sumOfProfitOfFebruary + item.quantity * item.price;
+            }
         }
-        for (Items item : march) {
-            if (item.isExpense) {
-                sumOfExpensesOfMarch = sumOfExpensesOfMarch + item.quantity * item.price;
-            } else sumOfProfitOfMarch = sumOfProfitOfMarch + item.quantity * item.price;
+        for (Items item : months) {
+            if (item.months == "march") {
+                if (item.isExpense) {
+                    sumOfExpensesOfMarch = sumOfExpensesOfMarch + item.quantity * item.price;
+                } else sumOfProfitOfMarch = sumOfProfitOfMarch + item.quantity * item.price;
+            }
         }
 
         if (sumOfProfitOfJanuary != yearlyReport.profit01 ||
